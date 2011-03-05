@@ -1,0 +1,24 @@
+#header
+ =link_to (image_tag 'header2.png') , root_url
+#section
+ .nav
+  %ul
+   %li=link_to "Home",root_url ,:class=>"active"
+   %li=link_to "What is Nannyshare?"
+   %li=link_to "About NannySharePartners.com"
+   %li=link_to "FAQs"
+   %li=link_to "Blog",root_url
+   %li= link_to 'Cancel', root_url
+ .clear
+ .mid-for-profile-page01
+  .mid-left-contact-Images
+   .profile-image
+    =image_tag 'leftimageformyprofilepage01.png'
+  .mid-right-sub-nav
+   .mid-right1
+    .mid-right-body1
+     .get-started-css
+      %h1="New Registration"
+
+      = render 'form'
+     

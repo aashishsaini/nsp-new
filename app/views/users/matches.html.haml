@@ -1,0 +1,55 @@
+#header
+ =link_to (image_tag 'header2.png') , root_url
+#section
+ .nav
+  %ul
+   %li=link_to "Home",user_path(@user),:class=>"active"
+   %li=link_to "What is Nannyshare?",:action=>"nanny_share",:controller=>"homes"
+   %li=link_to "About NannySharePartners.com",:action=>"about",:controller=>"homes"
+   %li=link_to "FAQs",:action=>"faq",:controller=>"homes"
+   %li=link_to "Blog",user_path(@user)
+   %li=link_to "Logout", :logout
+ .clear
+ .mid-for-profile-page01
+  .mid-left-contact-Images
+   .profile-image
+    .imgHolder
+     = image_tag "/system/#{@user.id}.jpg"
+
+  .mid-right-sub-nav
+   .get-started-css
+    %ul{:class=>'nav2'}
+     %li{:class=>'usename1'}
+      .span{:class=>'nameofusercss01'}
+       ="Welcome:#{@user.name}"
+
+     %li
+      =link_to "Matches"
+
+     %li
+      =link_to "Profile",@user
+     %li
+      =link_to "Mailbox"
+    .mid-right11
+     .mid-right-body11
+      .yourprofileansers-css-heading
+       .css-your-profile-ansers-text
+        ="Your Matches"
+        =@user2
+        %br
+      .css-table-data-text001
+       %div{:class=>"field2"}
+        -@user1.each do |s|
+         -if s.username!=@user.username
+          = image_tag "/system/#{s.id}.jpg",:width=>"80"
+          = s.username
+
+          %br
+          =rand(100)
+          ="miles away"
+          %br
+          =text_area_tag "add comment"
+          = button_to "Send Message"
+          %br
+          %br
+

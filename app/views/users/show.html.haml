@@ -1,0 +1,104 @@
+#header
+ =link_to (image_tag 'header2.png') , root_url
+#section
+ .nav
+  %ul
+   %li=link_to "Home",user_path(@user),:class=>"active"
+   %li=link_to "What is Nannyshare?",:action=>"nanny_share",:controller=>"homes"
+   %li=link_to "About NannySharePartners.com",:action=>"about",:controller=>"homes"
+   %li=link_to "FAQs",:action=>"faq",:controller=>"homes"
+   %li=link_to "Blog",user_path(@user)
+   %li=link_to "Logout", :logout
+ .clear
+ .mid-for-profile-page01
+  .mid-left-contact-Images
+   .profile-image
+    .imgHolder
+     = image_tag "/system/#{@user.id}.jpg"
+     
+  .mid-right-sub-nav
+   .get-started-css
+    %ul{:class=>'nav2'}
+     %li{:class=>'usename1'}
+      .span{:class=>'nameofusercss01'}
+       ="Welcome:#{@user.name}"
+
+     %li
+      =link_to "Matches",:action=>'matches'
+
+     %li
+      =link_to "Profile"
+     %li
+      =link_to "Mailbox"
+    .mid-right11
+     .mid-right-body11
+      .yourprofileansers-css-heading
+       .css-your-profile-ansers-text
+        ="Your Profile Answers"
+        -if !@user.activate_flag.nil?
+         -if @user.activate_flag==1
+          %span{:class=>"no"}= link_to "Deactivate Account |",:action=>'activate'
+          %span{:class=>"no"}= link_to 'Edit Profile ', edit_user_path(@user)
+         -else
+          %span{:class=>"no"}= link_to "Activate Account |" ,:action=>'deactivate'
+          %span{:class=>"no"}= link_to 'Edit Profile ', 'edit1'
+        -else
+         %span{:class=>"no"}= link_to 'Edit Profile ', edit_user_path(@user)
+
+        %br
+      .css-table-data-text001
+       %div{:class=>"field2"}
+        %p
+         =label_tag "Children"
+         %span{:class=>"no"}=@user.number_of_children
+
+     
+       %div{:class=>"field2"}
+        %p
+         =label_tag "Address"
+         %span{:class=>"no"}= @user.address+" "+ @user.city+" " + @user.state+" " + @user.zip 
+
+       
+       %div{:class=>"field2"}
+        %p
+         =label_tag "Preferred Nanny Share Date"
+         %span{:class=>"no"}= @user.begin_date_for_share
+
+
+       %div{:class=>"field2"}
+        %p
+         =label_tag"Budget"
+         %span{:class=>"no"}= @user.max_monthly_budget
+
+
+       %div{:class=>"field2"}
+        %p
+         =label_tag "Willing To host?"
+         %span{:class=>"no"}= @user.host
+
+
+       %div{:class=>"field2"}
+        %p
+         =label_tag"Religion"
+         %span{:class=>"no"}= @user.religion
+
+
+       %div{:class=>"field2"}
+        %p
+         =label_tag "View on Television"
+         %span{:class=>"no"}= @user.television_viewing
+
+
+       %div{:class=>"field2"}
+        %p
+         =label_tag "View on Junk Food"
+         %span{:class=>"no"}= @user.junk_food
+
+        
+       %br
+       %br
+
+      
+       
+
+

@@ -1,0 +1,76 @@
+#header
+ =link_to (image_tag 'header2.png') , root_url
+#section
+ .nav
+  %ul
+   %li=link_to "Home",root_url
+   %li=link_to "What is Nannyshare?",:action=>"nanny_share"
+   %li=link_to "About NannySharePartners.com",{},:class=>"active"
+   %li=link_to "FAQs",:action=>"faq"
+   -if @user=current_user
+    %li=link_to "Blog",user_path(@user)
+   -else
+    %li=link_to "Blog"
+ .clear
+ .mid
+  .mid-left
+   .register
+    .get-started-css
+     -if current_user
+      =link_to "Edit Profile", edit_user_path(:current)
+      %div{:style=>"float:centre"}
+
+       =button_to "Logout" , :logout, :class=>"start-btn"
+       .mid-left-contact-Images
+        .profile-image
+         - if @user.photo.exists? then
+          = image_tag @user.photo.url(:small)
+         -else
+          =image_tag 'leftimageformyprofilepage01.png'
+     -else
+      ="Get Started !"
+      %div{:style=>"float:centre"}
+       =button_to 'Register',new_user_path, :class=>"start-btn"
+      .sign-in
+       .already-a-member-css
+        ="Already a Member ?"
+        %br
+        %br
+        - form_for @user_session do |f|
+         %p
+         = f.label :username
+         = f.text_field :username,:size=>15
+         %p
+         = f.label :password
+         = f.password_field :password,:size=>15
+         %br
+         = link_to 'Forgot Id/Password'
+         = f.submit 'Sign in',:class=>"start-btn"
+         = fb_connect_async_js(128843600520298, { :cookie => true, :xfbml => true,:status=> true })
+         - if current_facebook_user
+          = "Welcome #{current_facebook_user.first_name} #{current_facebook_user.last_name}!"
+          =" or"
+          = "Hello #{fb_name(current_facebook_user, :useyou => false)}!"
+          = fb_logout_link("Logout of fb", request.url)
+         -else
+          = fb_login_and_redirect('http://localhost:3000/', :perms => 'email')
+      %br
+      %br
+      %br
+      =image_tag 'leftimageformyprofilepage01.png'
+
+
+  .mid-right-css-for-about-us-page
+   .mid-right-body
+    .mid-text-main-heading
+     .mid-text-main-heading-data
+      %p
+       %span{:style=>"color: rgb(255, 197, 11);"}="Families"
+       %span{:style=>"color: rgb(179, 211, 53);"}="are"
+       %span{:style=>"color: rgb(0, 174, 239);"}="our"
+       %span{:style=>"color: rgb(135, 50, 140);"}="inspiration"
+      %p
+       =" When we first became parents and started thinking about our  childcare needs, we were immediately drawn to the nannyshare  concept. We liked the flexibility it provided us as working parents and  the cost savings it provided over simply hiring a nanny. We also liked  the cost savings it provided over simply hiring a nanny. We also liked  the idea of giving our daughter a best friend with whom to play. But as  we started looking for a partner, we quickly found the process to be  both inefficient and complicated. Finding a good fit required  responding to one-off postings on parenting listserves or craigslist that  almost never described parenting values. We quickly realized that  unless we used a new method of finding a nannyshare/sharecare  partner, finding a partner that was a good fit would be more a function  of luck than anything else."
+       %br
+       %br
+       ="  We created this website to streamline the process of finding a  nannyshare partner by utilizing the principles pioneered by online  dating sites. Take five to ten minutes to fill out a questionnaire on your  parenting styles and we will match you with other users who live close  to you and have similar parenting values."

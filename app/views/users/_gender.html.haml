@@ -1,0 +1,8 @@
+%div{:class=>"field"}
+  
+  %span{:class=>'add'}= "Gender"
+  = select(:gender,"Id" ,"<option>Male</option><option>Female</option>" ,:prompt=>'Select')
+  = "Age"
+  = select(:age,"Id","<option>0-1</option><option>1-2</option><option>2-3</option>",:prompt=>"Select")
+  %br
+  

@@ -1,0 +1,104 @@
+
+#header
+ =link_to (image_tag 'header2.png') , root_url
+#section
+ .nav
+  %ul
+   %li=link_to "Home",root_url
+   %li=link_to "What is Nannyshare?",{},:class=>"active"
+   %li=link_to "About NannySharePartners.com",:action=>"about"
+   %li=link_to "FAQs",:action=>"faq"
+   -if @user=current_user
+    %li=link_to "Blog",user_path(@user)
+   -else
+    %li=link_to "Blog"
+ .clear
+ .mid
+  .mid-left
+   .register
+    .get-started-css
+     -if current_user
+      =link_to "Edit Profile", edit_user_path(:current)
+      %div{:style=>"float:centre"}
+
+       =button_to "Logout" , :logout, :class=>"start-btn"
+       .mid-left-contact-Images
+        .profile-image
+         - if @user.photo.exists? then
+          = image_tag @user.photo.url(:small)
+         -else
+          =image_tag 'leftimageformyprofilepage01.png'
+     -else
+      ="Get Started !"
+      %div{:style=>"float:centre"}
+       =button_to 'Register',new_user_path, :class=>"start-btn"
+      .sign-in
+       .already-a-member-css
+        ="Already a Member ?"
+        %br
+        %br
+        - form_for @user_session do |f|
+         %p
+         = f.label :username
+         = f.text_field :username,:size=>15
+         %p
+         = f.label :password
+         = f.password_field :password,:size=>15
+         %br
+         = link_to 'Forgot Id/Password'
+         = f.submit 'Sign in',:class=>"start-btn"
+         = fb_connect_async_js(128843600520298, { :cookie => true, :xfbml => true,:status=> true })
+         - if current_facebook_user
+          = "Welcome #{current_facebook_user.first_name} #{current_facebook_user.last_name}!"
+          =" or"
+          = "Hello #{fb_name(current_facebook_user, :useyou => false)}!"
+          = fb_logout_link("Logout of fb", request.url)
+         -else
+          = fb_login_and_redirect('http://localhost:3000/', :perms => 'email')
+      %br
+      %br
+      %br
+      =image_tag 'leftimageformyprofilepage01.png'
+
+
+  .mid-right
+   .mid-text-main-heading-for-home-page
+    .mid-text-heading-text001-css
+     .whatisnanny-main-question-text
+      ="What is a NannyShare?"
+     .whatisnanny-all-questions-text
+      ="What is a NannyShare?"
+      %br
+      %br
+     .whatisnanny-answers-of-questions
+      ="A nannyshare is precisely what it sounds like: when two or more families get together to share the services of a single nanny.Typically, the families will live near each other and then work out the logistics, including nanny compensation and benefits (including vacation days, sick days, etc.),nanny work hours,who will host the nannyshare, and provisions regarding the process for one family to withdraw from the nannyshare.  "
+     .whatisnanny-all-questions-text
+      ="What are the advantages of a NannyShare?"
+      %br
+      %br
+     .whatisnanny-answers-of-questions
+      =" Nannies offer the most flexibility when it comes to non-family provided child care but often at the greatest cost. At its best, nannyshares offer the best of both worlds, providing families involved much of the same flexibility as having a nanny while sharing the expenses. They provide care for your child with a stable and consistent care giver, they limit the number of children with whom your child is exposed thus limiting their exposure to germs and lowering their risk of sickness, they give your child  a similarly aged peer with whom to play, and they develop a close friendship, and give parents flexibility in pick up and drop-off times by eliminating fees for late pickups.  A nannyshare also provides extra hands to deal with back-up childcare should the nanny get sick. In a regular nanny or small daycare situation, a last minute call that the childcare provider is sick can lead parents to a last minute scramble for back-up care that will likely greatly disrupt the plans of at least one parent. In a nannyshare, the parents will have additional parent(s) to draw from to step into the caregiver role and thus limit the disruptions that the inevitable sickness will cause.    "
+      %br
+      %br
+     .whatisnanny-all-questions-text
+      ="Are there any downsides?"
+     .whatisnanny-answers-of-questions
+      =" For a nannyshare to be successful, the families involved need to make sure they have compatible parenting styles. Philosophical parenting differences in things like television, homework, housekeeping, and whether the nanny should drive the children could all strain the relationship and lead to problems. In addition, there are family logistical issues that need to be considered including coordinating days off and vacation schedules for the nanny. Also, a change in circumstances with one family could lead to a withdrawal and leave the other family abandoned.  Another risk is the financial one."
+      %br
+      %br
+     .whatisnanny-all-questions-text
+      ="I found a NannyShare Partner! What should we be considering?"
+     .whatisnanny-answers-of-questions
+      =" There are a lot of logistics and administrative items that need to be worked out between the families participating in a nannyshare. We recommend that you decide ahead of time your stance on these issues and to enter into a written contract of some sort to memorialize the agreement. By openly considering and communicating all expectations ahead of time, there will be no surprises or disagreements in the future relating to the issues. We have created a list of items to consider below, but this list is by no means comprehensive and partners should consider their particular facts and circumstances when determining what issues to discuss with their partner. "
+      %br
+      %br
+     .whatisnanny-all-questions-text
+      ="How do I find a Nanny? "
+     .whatisnanny-answers-of-questions
+      =" There are numerous nanny agencies to be found on the internet with lots of information about the process of hiring a nanny. We believe that the internet adequately provides nanny hiring services and as such we suggest that you work with one of them.    "
+      %br
+      %br
+
+
+  
+

@@ -1,0 +1,41 @@
+= javascript_include_tag :defaults
+<body onload="javascript:deactivateForm()" >
+#header
+ =link_to (image_tag 'header2.png') , root_url
+#section
+ .nav
+  %ul
+   %li=link_to "Home",user_path(@user)
+   %li=link_to "What is Nannyshare?"
+   %li=link_to "About NannySharePartners.com"
+   %li=link_to "FAQs"
+   %li=link_to "Blog",user_path(@user)
+   %li=link_to "Logout", :logout
+ .clear
+ .mid-for-profile-page01
+  .mid-left-contact-Images
+   .profile-image
+    .imgHolder
+     = image_tag "/system/#{@user.id}.jpg"
+     
+  .mid-right-sub-nav
+   .mid-right1
+    .mid-right-body1
+     .get-started-css
+      %h1="Editing Profile"
+      
+     
+      %h2
+      = render 'form'
+      %br
+      %br
+
+
+:javascript
+   function deactivateForm()   {
+
+   $('form_2').disable();;
+   
+   }
+
+

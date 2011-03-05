@@ -1,0 +1,87 @@
+
+#header
+ =link_to (image_tag 'header2.png') , root_url
+#section
+ .nav
+  %ul
+   %li=link_to "Home",root_url ,:class=>"active"
+   %li=link_to "What is Nannyshare?",:action=>'nanny_share'
+   %li=link_to "About NannySharePartners.com",:action=>'about'
+   %li=link_to "FAQs",:action=>"faq"
+   -if @user=current_user
+    %li=link_to "Blog",user_path(@user)
+   -else
+    %li=link_to "Blog"
+ .clear
+ .mid
+  .mid-left
+   .register
+    .get-started-css
+    
+     -if current_user
+      =link_to "Edit Profile", edit_user_path(:current)
+      %div{:style=>"float:centre"}
+       
+       =button_to "Logout" , :logout, :class=>"start-btn"
+       .mid-left-contact-Images
+        .profile-image
+         .imgHolder
+          = image_tag "/system/#{@user.id}.jpg"
+          
+     -else
+      ="Get Started !"
+      %div{:style=>"float:centre"}
+       =button_to 'Register',new_user_path, :class=>"start-btn"
+      .sign-in
+       .already-a-member-css
+        ="Already a Member ?"
+        %br
+        %br
+        - form_for @user_session do |f|
+         %p
+         = f.label :username
+         = f.text_field :username,:size=>15
+         %p
+         = f.label :password
+         = f.password_field :password,:size=>15
+         %br
+         
+         = link_to 'Forgot Id/Password'
+         = f.submit 'Sign in',:class=>"start-btn"
+         
+         %div{:id=>"fb-root"}
+          = fb_connect_async_js
+          - if current_facebook_user !=nil
+           =fb_logout_link("Logout", request.url)
+          - else
+           =fb_login_and_redirect(url_for(:controller=>"homes"),:perms=>"user_birthday")
+
+         
+          
+
+  .mid-right-for-home-page
+   .mid-right-body-for-home-page
+    .mid-text-main-heading-for-home-page
+     .mid-text-heading-text001-css
+      %p="Designed by parents for parents. Start enjoying the"
+      ="benefits of NannySharePartners.com today!"
+      %br
+      %br
+     .ullist-middle-text
+      %li="Flexibility for working parents"
+      %li="Give your child a best friend to play with"
+      %li="Good fits through our trusted network of parents and families"
+      %li="Made by parents, for parents"
+      %br
+      %br
+     .mid-text-heading-text001-css
+      -if !current_user
+       =link_to "Fill out", new_user_path
+       ="our questionnaire now to get started!"
+      -else
+       %p= "Fill out our questionnaire now to get started!"
+  .bottom-two-images-css
+   .bottom-left-image-css
+   .bottom-right-image-css
+
+

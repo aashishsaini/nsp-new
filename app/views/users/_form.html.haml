@@ -1,0 +1,285 @@
+<body onload="javascript:toggleCheck()" >
+- form_for(@user, :html => { :multipart => true,:id=>"form_2" }) do |f|
+  - if @user.errors.any?
+    %div{:id=>"error_explanation"}
+      %h2= pluralize(@user.errors.count, "error")
+      ="prohibited this user from being saved:"
+
+      %ul
+      - @user.errors.full_messages.each do |msg|
+        %li= msg
+
+  
+  %div{:class=>"field"}
+    = f.label "name*"
+    = f.text_field :name,:size=>38
+  %div{:class=>"field"}
+    = f.label "choose_a_username*"
+    = f.text_field :username,:size=>38
+  %div{:class=>"field"}
+    = f.label "email*"
+    = f.text_field :email ,:size=>38
+  %div{:class=>"field"}
+    = f.label "password*"
+    = f.password_field :password ,:size=>38
+  %div{:class=>"field"}
+    = f.label "password_confirmation*"
+    = f.password_field :password_confirmation,:size=>38
+  %div{:class=>"field"}
+    = f.label :upload_photo
+    = f.file_field :photo
+  %div{:class=>"field"}
+    = f.label :address
+    = f.text_field :address,:size=>38
+  %div{:class=>"field"}
+    = f.label :city
+    = f.text_field :city,:size=>38
+  %div{:class=>"field"}
+    = f.label :state
+    = f.text_field :state,:size=>38
+  %div{:class=>"field"}
+    = f.label :zip
+    = f.text_field :zip,:size=>38
+  %div{:class=>"field"}
+    = f.label :number_of_children
+    = f.text_field :number_of_children,:size=>38
+  %div{:class=>"field"}
+    = label_tag "Please Specify "
+  #place
+    = "Gender"
+    = f.select(:gender ,"<option>Male</option><option>Female</option>" ,:prompt=>'Select')
+    = "Age"
+    = f.select(:age,"<option>0-1</option><option>1-2</option><option>2-3</option>",:prompt=>"Select")
+    = add_more_link "Add More"
+    %br
+    %br
+  %div{:class=>"field"}
+    = label_tag "Days and hours child care needed? "
+    %br
+    %ul
+      %li
+        = check_box_tag('days[1]',"whole week",1,{:onclick =>"javascript:toggleCheck()"})
+        %span= "Whole Week"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_1"
+        = select_tag "hours[]",options_for_select(["AM","PM"]),:id=>"hour_2"
+        ="to"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_3"
+        = select_tag "hours[]",options_for_select(["PM","AM"]),:id=>"hour_4"
+
+      %li
+        = check_box_tag('days[2]',"monday")
+        %span= "Monday"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_5"
+        = select_tag "hours[]",options_for_select(["AM","PM"]),:id=>"hour_6"
+        ="to"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]) ,:id=>"hour_7"
+        = select_tag "hours[]",options_for_select(["PM","AM"]),:id=>"hour_8"
+  
+      %li
+        = check_box_tag('days[3]',"tuesday")
+        %span= "Tuesday"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_9"
+        = select_tag "hours[]",options_for_select(["AM","PM"]),:id=>"hour_10"
+        ="to"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_11"
+        = select_tag "hours[]",options_for_select(["PM","AM"]),:id=>"hour_12"
+
+      %li
+        = check_box_tag('days[4]',"wednesday")
+        %span= "Wednesday"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_13"
+        = select_tag "hours[]",options_for_select(["AM","PM"]),:id=>"hour_14"
+        ="to"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_15"
+        = select_tag "hours[]",options_for_select(["PM","AM"]),:id=>"hour_16"
+
+      %li
+        = check_box_tag('days[5]',"thursday")
+        %span= "Thursday"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_17"
+        = select_tag "hours[]",options_for_select(["AM","PM"]),:id=>"hour_18"
+        ="to"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_19"
+        = select_tag "hours[]",options_for_select(["PM","AM"]),:id=>"hour_20"
+
+      %li
+        = check_box_tag('days[6]',"friday")
+        %span= "Friday"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_21"
+        = select_tag "hours[]",options_for_select(["AM","PM"]),:id=>"hour_22"
+        ="to"
+        = select_tag "hours[]",options_for_select(["1","2","3","4","5","6","7","8","9","10","11","12"]),:id=>"hour_23"
+        = select_tag "hours[]",options_for_select(["PM","AM"]),:id=>"hour_24"
+
+
+  %br
+  %div{:class=>"field"}
+    = label_tag "Maximum monthly Budget "
+    = f.select(:max_monthly_budget,"<option>under $600</option><option>$600-$800</option><option> $800-$1,000</option><option> $1,000-$1,200</option><option> $1,201-$1,400</option><option>$1,401-1,600</option><option> $1,601-$1,800</option><option>$1,801-$2,000</option><option> $2,001-$2,200</option><option> over $2,200</option>",:prompt=>"Select")
+  
+  %div{:class=>"field"}
+    = label_tag "Willing To Host "
+    = f.select(:host,"<option>Yes</option><option>No</option>",:prompt=>"Select",:width=>"100px")
+  %div{:class=>"field"}
+    = label_tag :begin_date_for_share
+    = f.date_select :begin_date_for_share
+  %div{:class=>"field"}
+    = label_tag "Hours Needed "
+    %ul
+      %li
+        = check_box_tag('hours_need[1]',"morning")
+        %span= "Morning"
+      %li
+        = check_box_tag('hours_need[2]',"afternoon")
+        %span= "Afternoon"
+      %li
+        = check_box_tag('hours_need[3]',"evening")
+        %span= "Evening"
+
+  %div{:class=>"field"}
+    = label_tag "Highest Education Level "
+    %br
+    %br
+    =label_tag "Parent1"
+    = f.select(:edu_of_parent_father,"<option>Some High School</option><option> High School Graduate</option><option>Some College</option><option>College Graduate</option><option> Post-Graduate degree</option>",:prompt=>"Select")
+    %br
+    %br
+    =label_tag"Parent2"
+    = f.select(:edu_of_parent_mother,"<option>Some High School</option><option> High School Graduate</option><option>Some College</option><option>College Graduate</option><option> Post-Graduate degree</option>",:prompt=>"Select")
+  %br
+  %div{:class=>"field"}
+    = label_tag "Already have a Nanny"
+    = f.select(:already_nanny,"<option>Yes</option><option>No</option>",:prompt=>"Select")
+  %div{:class=>"field"}
+    = label_tag "Religion"
+  %div{:style=>"float:left"} 
+    = check_box_tag('religion[1]',"buddhist")
+    = "Buddhist"
+    = check_box_tag('religion[2]',"christian-protestant")
+    = "Christian - Protestant"
+    %br
+    = check_box_tag('religion[3]',"hindu")
+    = "Hindu"
+    = check_box_tag('religion[4]',"christian-catholic")
+    = "Christian-Catholic"
+    %br
+    = check_box_tag('religion[5]',"jewish")
+    = "Jewish"
+    = check_box_tag('religion[6]',"mormon")
+    = "Mormon"
+    %br
+    = check_box_tag('religion[7]',"muslim")
+    = "Muslim"
+    = check_box_tag('religion[8]',"none")
+    = "None"
+    %br
+    %br
+     
+
+  %div{:class=>"field"}
+    = label_tag "Junk Food Mentality"
+    = f.select(:junk_food,"<option>Never</option><option>  Occasionally (i.e. once a week or less and in moderation)</option><option> several times a week in moderation</option><option>whenever/no preference</option>",:prompt=>"Select")
+  %div{:class=>"field"}
+    = label_tag "Television viewing:"
+    = f.select(:television_viewing,"<option>None</option><option> <1 hr per day</option><option> 1-2 hr per day</option><option> >3hr</option>",:prompt=>"Select")
+  %hr
+  %div{:class=>"field"}
+    %h2= "Nanny Preferences"
+    = label_tag "English fluency"
+    = f.select(:english_fluency,"<option>Native Speaker</option><option> Fluent Non-Native Speaker </option><option> Non-English Speaker</option>",:prompt=>"Select")
+  #lang
+    %div{:class=>"field"}
+      = label_tag "Foreign Language spoken"
+      = f.select(:foreign_language,"<option>Chinese - Mandarin</option><option> Chinese - Cantonese</option><option> Chinese - Taiwanese</option><option> French</option><option> German</option><option>Italian</option><option>Korean</option><option> Russia</option><option>Swedish</option><option> Spanish</option><option>Tagalog</option><option>Other</option>",:prompt=>"Select")
+      = add_lang_link "Add more languages "
+  %div{:class=>"field"}
+    = label_tag "Nanny allowed to drive children "
+    = f.select(:drive_child,"<option>Yes</option><option>No</option>",:prompt=>"Select")
+  %div{:class=>"field"}
+    = label_tag "Nanny allowed to take kids on 	public transportation "
+    = f.select(:public_transportation,"<option>Yes</option><option>No</option>",:prompt=>"Select")
+  %br
+  %div{:class=>"field"}
+    = label_tag "Level of Experience"
+    = f.select(:level_of_experience,"<option><1 year</option><option> 1-3 years</option><option> 3-5 years</option><option>5-10 years</option><option>10+ years</option>",:prompt=>"Select")
+  %div{:class=>"field"}
+    = label_tag "Smoker"
+    = f.select(:smoker,"<option>Yes</option><option>No</option>",:prompt=>"Select")
+  %div{:class=>"field"}
+    = label_tag "CPR  Certified"
+    = f.select(:cpr_certification,"<option>Yes</option><option>No</option>",:prompt=>"Select")
+  %br
+  %div{:style=>"float:centre"}
+    = f.submit "Register me" , :class=>"start-btn1",:width=>"101px"
+
+:javascript
+  function toggleCheck()   {
+  var cb=$('days_1');
+  if (cb.checked){
+  $('hour_1').enable();;
+  $('hour_2').enable();;
+  $('hour_3').enable();;
+  $('hour_4').enable();;
+  $('hour_5').disable();;
+  $('hour_6').disable();;
+  $('hour_7').disable();;
+  $('hour_8').disable();;
+  $('hour_9').disable();;
+  $('hour_10').disable();;
+  $('hour_11').disable();;
+  $('hour_12').disable();;
+  $('hour_13').disable();;
+  $('hour_14').disable();;
+  $('hour_15').disable();;
+  $('hour_16').disable();;
+  $('hour_17').disable();;
+  $('hour_18').disable();;
+  $('hour_19').disable();;
+  $('hour_20').disable();;
+  $('hour_21').disable();;
+  $('hour_22').disable();;
+  $('hour_23').disable();;
+  $('hour_24').disable();;
+  $('days_2').disable();;
+  $('days_3').disable();;
+  $('days_4').disable();;
+  $('days_5').disable();;
+  $('days_6').disable();;
+
+
+
+  }
+  else {
+    $('hour_1').disable();;
+    $('hour_2').disable();;
+    $('hour_3').disable();;
+    $('hour_4').disable();;
+    $('hour_5').enable();;
+    $('hour_6').enable();;
+    $('hour_7').enable();;
+    $('hour_8').enable();;
+    $('hour_9').enable();;
+    $('hour_10').enable();;
+    $('hour_11').enable();;
+    $('hour_12').enable();;
+    $('hour_13').enable();;
+    $('hour_14').enable();;
+    $('hour_15').enable();;
+    $('hour_16').enable();;
+    $('hour_17').enable();;
+    $('hour_18').enable();;
+    $('hour_19').enable();;
+    $('hour_20').enable();;
+    $('hour_21').enable();;
+    $('hour_22').enable();;
+    $('hour_23').enable();;
+    $('hour_24').enable();;
+    $('days_2').enable();;
+    $('days_3').enable();;
+    $('days_4').enable();;
+    $('days_5').enable();;
+    $('days_6').enable();;
+
+
+  }
+  }

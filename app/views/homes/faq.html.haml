@@ -1,0 +1,91 @@
+#header
+ =link_to (image_tag 'header2.png') , root_url
+#section
+ .nav
+  %ul
+   %li=link_to "Home",root_url
+   %li=link_to "What is Nannyshare?",:action=>"nanny_share"
+   %li=link_to "About NannySharePartners.com",:action=>"about"
+   %li=link_to "FAQs",{},:class=>"active"
+   -if @user=current_user
+    %li=link_to "Blog",user_path(@user)
+   -else
+    %li=link_to "Blog"
+ .clear
+ .mid
+  .mid-left
+   .register
+    .get-started-css
+     -if current_user
+      =link_to "Edit Profile", edit_user_path(:current)
+      %div{:style=>"float:centre"}
+
+       =button_to "Logout" , :logout, :class=>"start-btn"
+       .mid-left-contact-Images
+        .profile-image
+         - if @user.photo.exists? then
+          = image_tag @user.photo.url(:small)
+         -else
+          =image_tag 'leftimageformyprofilepage01.png'
+     -else
+      ="Get Started !"
+      %div{:style=>"float:centre"}
+       =button_to 'Register',new_user_path, :class=>"start-btn"
+      .sign-in
+       .already-a-member-css
+        ="Already a Member ?"
+        %br
+        %br
+        - form_for @user_session do |f|
+         %p
+         = f.label :username
+         = f.text_field :username,:size=>15
+         %p
+         = f.label :password
+         = f.password_field :password,:size=>15
+         %br
+         = link_to 'Forgot Id/Password'
+         = f.submit 'Sign in',:class=>"start-btn"
+         = fb_connect_async_js(128843600520298, { :cookie => true, :xfbml => true,:status=> true })
+         - if current_facebook_user
+          = "Welcome #{current_facebook_user.first_name} #{current_facebook_user.last_name}!"
+          =" or"
+          = "Hello #{fb_name(current_facebook_user, :useyou => false)}!"
+          = fb_logout_link("Logout of fb", request.url)
+         -else
+          = fb_login_and_redirect('http://localhost:3000/', :perms => 'email')
+      %br
+      %br
+      %br
+      =image_tag 'leftimageformyprofilepage01.png'
+
+
+  .mid-right
+   .mid-right-body
+    .mid-text-main-heading-for-faq-page
+     %span{:class=>"faq-main-question-text"}="Frequently Asked Questions"
+     %br
+     %h4{:class=>"faq-all-questions-text"}="What is NannySharePartners.com?"
+     %br
+     %p{:class=>"faq-answers-of-questions"}="NannySharePartners.com launched in [___], 2011 with the hopes of bringing together   families looking for nannyshare partners. NannySharePartners.com\'s matching service  presents users with potentially compatible nannyshare partners based on the nanny needs  of the families and styles of parenting."
+     %br
+     %span{:class=>"faq-all-questions-text"}="Does NannySharePartners.com charge for its services?"
+     %br
+     %span{:class=>"faq-answers-of-questions"}="No, the use of NannySharePartners.com is free. Our goal in creating this site was not to  get rich but to provide a service to parents that hopefully will ease the process of finding a  nannyshare partner. Nothing would make us happier than knowing that we helped parents  find good nannyshare partners and saved them time. "
+     %br
+     %span{:class=>"faq-all-questions-text"}="If the service is free, how do you cover your costs?"
+     %br
+     %span{:class=>"faq-answers-of-questions"}="Our goal in creating this site is not to make money but to offer a service to parents. That said, the costs of creating and maintaining this site are not insignificant and we are taking donations to help offset some of these costs. If you have the resources and would like to join in our vision, please donate to us "
+     %br
+     %span{:class=>"faq-all-questions-text"}="How does NannySharePartners.com\'s matching service work?"
+     %br
+     %span{:class=>"faq-answers-of-questions"}="Each new NannySharePartners.com user begins by completing a questionnaire about certain parenting preferences. After completing the questionnaire,NannySharePartners.com members are presented with a pool of matches of other users who have nanny needs compatible with the user and share similar views on parenting. NannySharePartners.com then enables users to directly communicate with each other through NannySharePartners mail, a program designed to help protect privacy until the  parties are ready to meet."
+     %br
+     %span{:class=>"faq-all-questions-text"}="What is NannySharePartner Mail?"
+     %br
+     %span{:class=>"faq-answers-of-questions"}="NannySharePartners Mail is a private email messaging system which enables   NannySharePartners.com users to communicate with each other freely in a safe and  trusted environment without sharing their email addresses or other personal contact  information."
+     %br
+     %span{:class=>"faq-all-questions-text"}="Does NannySharePartners.com conduct background checks on its users?"
+     %br
+     %span{:class=>"faq-answers-of-questions"}="NannySharePartners.com does not conduct background checks on its users. While we   attempt to provide additional layers of security (including through NannySharePartner Mail)  and will terminate accounts that have been flagged to us by our users, it is important to  use caution and common sense with every match received."
+     %br
